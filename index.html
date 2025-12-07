@@ -3,115 +3,351 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>您的公司名称 - 官方网站</title>
+    <title>伍濯桐信息技术 | 数字化转型与云原生赋能者</title>
     <style>
+        /* --- 全局样式 --- */
+        :root {
+            --primary-color: #0f172a; /* 深蓝黑 */
+            --accent-color: #2563eb; /* 科技蓝 */
+            --text-color: #334155;    /* slate灰 */
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
         }
-        header {
-            background-color: #007bff; /* 品牌主色调 */
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 导航栏 --- */
         nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span { color: var(--accent-color); }
+
+        .nav-links { display: flex; gap: 2rem; }
+        
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* --- Hero 区域 --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 10px 0;
-            background-color: #333;
-        }
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
+            color: var(--white);
+            padding: 0 20px;
+            position: relative;
             overflow: hidden;
-            padding: 20px 0;
         }
-        section {
-            padding: 20px;
-            margin-bottom: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        /* 简单的背景装饰 */
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--accent-color);
+            filter: blur(150px);
+            opacity: 0.2;
+            top: -50px;
+            left: -50px;
         }
-        h2 {
-            color: #007bff;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+
+        .hero-content { z-index: 1; max-width: 800px; animation: fadeInUp 1s ease; }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-weight: 800;
         }
-        ul {
-            list-style: none;
-            padding: 0;
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
         }
-        ul li {
-            margin-bottom: 10px;
-        }
-        footer {
-            background-color: #333;
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--accent-color);
             color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        /* --- 关于我们 --- */
+        .section {
+            padding: 5rem 10%;
+        }
+
+        .section-header {
             text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-header .divider {
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        .about-text {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #475569;
+        }
+
+        /* --- 核心业务 (卡片式) --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border-top: 4px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tech-list {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            background: #eff6ff;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        /* --- 技术栈 (Tag Cloud) --- */
+        .tech-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .tech-section h2 { color: var(--white); }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tech-tag {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            font-family: monospace; /* 增加技术感 */
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .tech-tag:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        /* --- 响应式 --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* 移动端简单处理，隐藏导航 */
+            .hero h1 { font-size: 2.5rem; }
+            .section { padding: 4rem 5%; }
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>[您的公司名称]</h1>
-        <p>[Slogan: 专注创新，引领未来]</p>
-    </header>
-
     <nav>
-        <a href="#about">关于我们</a>
-        <a href="#services">核心业务</a>
-        <a href="#contact">联系我们</a>
+        <div class="logo">伍濯桐<span>信息技术</span></div>
+        <div class="nav-links">
+            <a href="#about">关于我们</a>
+            <a href="#services">核心业务</a>
+            <a href="#tech">技术栈</a>
+        </div>
     </nav>
 
-    <div class="container">
+    <header class="hero">
+        <div class="hero-content">
+            <h1>数字化转型与<br>云原生赋能</h1>
+            <p>我们不仅仅是 IT 服务商，更是您业务敏捷化的战略赋能者</p>
+            <a href="#services" class="cta-button">探索解决方案</a>
+        </div>
+    </header>
 
-        <section id="about">
-            <h2>关于我们</h2>
-            <p><strong>[在此插入公司简介，约 100-200 字]</strong></p>
-            <p>我们是一家致力于提供[行业关键词]解决方案的创新科技公司。自成立以来，我们始终秉承[核心价值观]，通过[独特技术]为客户创造长期价值。我们的团队由一群充满激情和经验丰富的[专业领域]专家组成，共同推动行业变革。</p>
-        </section>
+    <section id="about" class="section">
+        <div class="section-header">
+            <h2>核心定位</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="about-text">
+            <p>伍濯桐信息技术专注于为客户提供全生命周期的数字化转型解决方案。我们通过深度整合行业专长与前沿技术栈，驱动客户实现跨越式发展。作为客户创新生态系统中的关键伙伴，我们致力于解耦传统架构，重构业务价值。</p>
+        </div>
+    </section>
 
-        <section id="services">
-            <h2>核心业务</h2>
-            <ul>
-                <li><strong>业务一：</strong> [简要描述第一个核心服务或产品]</li>
-                <li><strong>业务二：</strong> [简要描述第二个核心服务或产品]</li>
-                <li><strong>业务三：</strong> [简要描述第三个核心服务或产品]</li>
-            </ul>
-        </section>
+    <section id="services" class="section" style="background-color: #fff;">
+        <div class="section-header">
+            <h2>服务矩阵</h2>
+            <div class="divider"></div>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="card-icon">🌐</div>
+                <h3>云原生架构咨询</h3>
+                <p>从基础设施即代码 (IaC) 到 Serverless 的端到端战略规划。通过微服务拆分与容器化部署，实现应用的高可用性与弹性伸缩。</p>
+                <div class="tech-list">
+                    K8s · Microservices · IaC
+                </div>
+            </div>
 
-        <section id="contact">
-            <h2>联系我们</h2>
-            <p>我们期待与您的合作！</p>
-            <ul>
-                <li><strong>电话：</strong> [您的联系电话]</li>
-                <li><strong>邮箱：</strong> [您的商务邮箱]</li>
-                <li><strong>地址：</strong> [您的公司地址]</li>
-            </ul>
-        </section>
+            <div class="service-card">
+                <div class="card-icon">💻</div>
+                <h3>智能应用开发</h3>
+                <p>采用 DevOps 与 CI/CD 管道，在云端快速交付高性能应用。注入 AI/ML 能力，将业务流程从自动化升级为智能化。</p>
+                <div class="tech-list">
+                    DevOps · CI/CD · AI/ML
+                </div>
+            </div>
 
-    </div>
+            <div class="service-card">
+                <div class="card-icon">📊</div>
+                <h3>数据资产洞察</h3>
+                <p>构建云端统一数据湖仓架构，对海量异构数据进行治理。激活数据资产价值，转化为预测性分析能力。</p>
+                <div class="tech-list">
+                    Data Lake · BI · Warehouse
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech" class="section tech-section">
+        <div class="section-header">
+            <h2>技术核心</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="tags-container">
+            <span class="tech-tag">Cloud Native</span>
+            <span class="tech-tag">Kubernetes</span>
+            <span class="tech-tag">Microservices</span>
+            <span class="tech-tag">Serverless/FaaS</span>
+            <span class="tech-tag">Full-Stack Engineering</span>
+            <span class="tech-tag">DevOps</span>
+            <span class="tech-tag">Data Lakehouse</span>
+            <span class="tech-tag">Heterogeneous Integration</span>
+        </div>
+    </section>
 
     <footer>
-        &copy; 2025 [您的公司名称]. All Rights Reserved.
+        <p>&copy; 2025 佛山市南海区伍濯桐信息技术咨询中心. All Rights Reserved.</p>
+        <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">Driven by Innovation · Powered by Cloud</p>
     </footer>
 
 </body>
